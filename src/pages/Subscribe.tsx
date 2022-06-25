@@ -2,6 +2,7 @@ import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Logo } from "../components/Logo";
 import { useCreateSubscriberMutation } from "../graphql/generated";
+import img from '../../src/assets/code-mockup.png'
 
 export function Subscribe() {
   const navigate = useNavigate();
@@ -40,40 +41,38 @@ export function Subscribe() {
           </p>
         </div>
 
-        <div>
-          <div className="p-8 bg-gray-700 border border-gray-500 rounded">
-            <strong className="text-2xl mb-6 block">
-              Inscreva-se gratuitamente
-            </strong>
-            <form
-              onSubmit={handleSubscribe}
-              className="flex flex-col gap-2 w-full"
-            >
-              <input
-                className="bg-gray-900 rounded px-5 h-14"
-                type="text"
-                placeholder="Seu nome completo"
-                onChange={(e) => setName(e.target.value)}
-              />
-              <input
-                className="bg-gray-900 rounded px-5 h-14"
-                type="email"
-                placeholder="Digite o seu email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
+        <div className="p-8 bg-gray-700 border border-gray-500 rounded">
+          <strong className="text-2xl mb-6 block">
+            Inscreva-se gratuitamente
+          </strong>
+          <form
+            onSubmit={handleSubscribe}
+            className="flex flex-col gap-2 w-full"
+          >
+            <input
+              className="bg-gray-900 rounded px-5 h-14"
+              type="text"
+              placeholder="Seu nome completo"
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              className="bg-gray-900 rounded px-5 h-14"
+              type="email"
+              placeholder="Digite o seu email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="mt-4 bg-green-500 uppercase py-4 rounded font-bold text-sm hover:bg-green-700 transition-colors disabled:opacity-50"
-              >
-                Garantir a minha vaga
-              </button>
-            </form>
-          </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="mt-4 bg-green-500 uppercase py-4 rounded font-bold text-sm hover:bg-green-700 transition-colors disabled:opacity-50"
+            >
+              Garantir a minha vaga
+            </button>
+          </form>
         </div>
       </div>
-      <img src="/src/assets/code-mockup.png" className="mt-10" alt="" />
+      <img src={img} className="mt-10" alt="" />
     </div>
   );
 }
