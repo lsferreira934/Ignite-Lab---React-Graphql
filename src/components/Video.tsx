@@ -10,6 +10,7 @@ import "@vime/core/themes/default.css";
 import "@vime/core/themes/light.css";
 import { useGetLessonBySlugQuery } from "../graphql/generated";
 import classNames from "classnames";
+import { Loading } from "./Loading";
 
 interface VideoSlug {
   lessonSlug: string;
@@ -24,13 +25,13 @@ export function Video(props: VideoSlug) {
   if (!data || !data.lesson) {
     return (
       <div className="flex-1">
-        <p>Carregando...</p>
+       <Loading />
       </div>
     );
   }
 
   return (
-    <div className={classNames("flex-1", {"z-0": !props.disableScreen})}>
+    <div className={classNames("flex-1 z-0")}>
       <div className="bg-black flex justify-center">
         <div className="h-full w-full max-w-[1000px] max-h-[60vh] aspect-video">
           {data ? (
@@ -40,14 +41,14 @@ export function Video(props: VideoSlug) {
             </Player>
           ) : (
             <div className="flex-1">
-              <p>Carregando...</p>
+              <Loading />
             </div>
           )}
         </div>
       </div>
 
       <div className="p-8 max-w-[1100px] mx-auto">
-        <div className="flex flex-col sm:flex-col items-start gap-16 md:flex-row">
+        <div className="flex flex-col sm:flex-col md:flex-col lg:flex-row items-start gap-16">
           <div className="flex-1">
             <h1 className="text-2xl font-bold">{data.lesson.title}</h1>
             <p className="mt-4 text-gray-200 leading-relaxed">
@@ -71,7 +72,7 @@ export function Video(props: VideoSlug) {
               </div>
             )}
           </div>
-          <div className="flex flex-col gap-4 w-full md:w-auto">
+          <div className="flex flex-col gap-4 w-full lg:w-auto">
             <a
               href=""
               className="p-4 text-sm bg-green-500 flex items-center rounded font-bold uppercase gap-2 justify-center hover:bg-green-700 transition-colors "
@@ -89,7 +90,7 @@ export function Video(props: VideoSlug) {
           </div>
         </div>
 
-        <div className="gap-8 mt-20 grid grid-rom md:grid-cols-2">
+        <div className="gap-8 mt-20 grid grid-rom lg:grid-cols-2">
           <a
             href="/"
             className="bg-gray-700 rounded overflow-hidden flex items-stretch gap-6 hover:bg-gray-600 transition-colors"

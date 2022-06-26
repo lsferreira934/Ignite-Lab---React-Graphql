@@ -13,18 +13,18 @@ export function Sidebar(props: PropsIsOpen) {
   return (
     <aside
       className={classNames(
-        "absolute right-0 w-[70%] md:relative md:block md:w-[348px] bg-gray-700 p-6 border-l border-gray-600",
+        "absolute right-0 w-[100%] bg-gray-700 p-4 border-l border-gray-600 md:relative mb:p-6 md:block md:w-[348px] md:right-0",
         {
-          hidden: props.isOpen,
+          "hidden": props.isOpen,
           "z-[100]": props.isOpen,
-          "h-screen": !props.isOpen,
+          "h-screen md:h-auto": !props.isOpen,
         }
       )}
     >
       <span className="font-bold text-xl pb-6 mb-6 border-b border-gray-500 block">
         Cronograma de aulas
       </span>
-      <div className="flex flex-col gap-8 h-[32rem] overflow-y-auto md:overflow-hidden md:h-screen ">
+      <div className="flex flex-col gap-8 h-3/4 overflow-y-auto  md:overflow-hidden md:h-auto">
         {data?.lessons.map((lesson) => {
           return (
             <Lesson

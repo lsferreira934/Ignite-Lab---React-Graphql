@@ -13,10 +13,9 @@ export function Event() {
     setIsOpen(!isOpen);
   }
 
-   
   return (
     <div
-      className={classNames("flex flex-col", { fixed: !isOpen })}
+      className={classNames("flex flex-col", { "fixed md:relative": !isOpen })}
     >
       <Header handleShowSidebar={handleShowSidebar} switchIcon={isOpen} />
       <main className="flex flex-1 ">
