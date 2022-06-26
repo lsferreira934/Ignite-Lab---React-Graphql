@@ -1,8 +1,8 @@
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Logo } from "../components/Logo";
-import { useCreateSubscriberMutation } from "../graphql/generated";
-import img from '../../src/assets/code-mockup.png'
+import { useCreateSubscriberMutation, useGetLessonsQuery } from "../graphql/generated";
+import img from "../../src/assets/code-mockup.png";
 
 export function Subscribe() {
   const navigate = useNavigate();
@@ -11,6 +11,7 @@ export function Subscribe() {
   const [email, setEmail] = useState("");
 
   const [createSubscriber, { loading }] = useCreateSubscriberMutation();
+  const { data } = useGetLessonsQuery();
 
   async function handleSubscribe(event: FormEvent) {
     event.preventDefault();
@@ -20,19 +21,19 @@ export function Subscribe() {
         email,
       },
     });
-
-    navigate("/event");
+  
+    navigate(`/event/lesson/${data?.lessons[0].slug}`);
   }
 
   return (
     <div className="min-h-screen bg-blur bg-cover bg-no-repeat flex flex-col items-center">
-      <div className="w-full max-w-[1100] flex items-center justify-between mt-20 mx-auto">
-        <div className="max-w-[640px]">
+      <div className="w-full max-w-[1100] p-8 flex flex-col gap-8 md:flex-row md:gap-0 items-center justify-center md:justify-between md:mt-20 mx-auto">
+        <div className="max-w-[640px] flex flex-col">
           <Logo />
           <h1 className="mt-8 text-[2.5rem] leading-tight">
-            Construa uma <strong className="text-blue-500">aplicação</strong>{" "}
-            completa, do zero, com{" "}
-            <strong className="text-blue-500">React</strong>
+            Construa uma <strong className="text-blue-500">aplicação </strong>
+            completa, do zero, com
+            <strong className="text-blue-500"> React</strong>
           </h1>
           <p className="mt-4 text-gray-200 leading-relaxed">
             Em apenas uma semana você vai dominar na prática uma das tecnologias

@@ -9,6 +9,7 @@ interface LessonProps {
   slug: string;
   availableAt: Date;
   type: "live" | "class";
+  handleShowSidebar: () => void;
 }
 
 export function Lesson(props: LessonProps) {
@@ -24,7 +25,7 @@ export function Lesson(props: LessonProps) {
   const isActiveLesson = slug === props.slug;
 
   return (
-    <Link to={`/event/lesson/${props.slug}`} className="group">
+    <Link to={`/event/lesson/${props.slug}`} className="group" onClick={props.handleShowSidebar}>
       <span className="text-gray-300">{availabeDateFormated}</span>
 
       <div

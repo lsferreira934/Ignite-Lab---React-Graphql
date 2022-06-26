@@ -9,9 +9,11 @@ import {
 import "@vime/core/themes/default.css";
 import "@vime/core/themes/light.css";
 import { useGetLessonBySlugQuery } from "../graphql/generated";
+import classNames from "classnames";
 
 interface VideoSlug {
   lessonSlug: string;
+  disableScreen: boolean;
 }
 
 export function Video(props: VideoSlug) {
@@ -28,7 +30,7 @@ export function Video(props: VideoSlug) {
   }
 
   return (
-    <div className="flex-1">
+    <div className={classNames("flex-1", {"z-0": !props.disableScreen})}>
       <div className="bg-black flex justify-center">
         <div className="h-full w-full max-w-[1000px] max-h-[60vh] aspect-video">
           {data ? (

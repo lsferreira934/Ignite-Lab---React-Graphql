@@ -1,15 +1,30 @@
+import classNames from "classnames";
 import { Lesson } from "../components/Lesson";
 import { useGetLessonsQuery } from "../graphql/generated";
 
-export function Sidebar() {
+interface PropsIsOpen {
+  isOpen: boolean;
+  handleShowSidebar: () => void;
+}
+
+export function Sidebar(props: PropsIsOpen) {
   const { data } = useGetLessonsQuery();
 
   return (
-    <aside className="absolute right-0 hidden w-3/5 md:relative md:block md:w-[348px] bg-gray-700 p-6 border-l border-gray-600">
+    <aside
+      className={classNames(
+        "absolute right-0 w-[70%] md:relative md:block md:w-[348px] bg-gray-700 p-6 border-l border-gray-600",
+        {
+          hidden: props.isOpen,
+          "z-[100]": props.isOpen,
+          "h-screen": !props.isOpen,
+        }
+      )}
+    >
       <span className="font-bold text-xl pb-6 mb-6 border-b border-gray-500 block">
         Cronograma de aulas
       </span>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-8 h-[32rem] overflow-y-auto md:overflow-hidden md:h-screen ">
         {data?.lessons.map((lesson) => {
           return (
             <Lesson
@@ -18,6 +33,7 @@ export function Sidebar() {
               slug={lesson.slug}
               availableAt={new Date(lesson.availableAt)}
               type={lesson.lessonType}
+              handleShowSidebar={props.handleShowSidebar}
             />
           );
         })}
